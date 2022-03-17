@@ -18,12 +18,13 @@ mongoose.connect(`${hostDB}`, { useNewUrlParser: true}, (err, res) => {
             console.log(`Iniciando Servidor...`);
             console.log(`http://localhost:${port}/api/v1/`);
         });
-        User.collection.insert(users, function (err, docs) {
+       /* User.collection.insert(users, function (err, docs) {
           if (err){ 
               return console.error(err);
           } else {
             console.log("Multiple documents inserted to Collection");
           }
         });
+        */
     }
 });
