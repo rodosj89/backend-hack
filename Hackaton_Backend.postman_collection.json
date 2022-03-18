@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "1f382cbe-c737-4087-a731-5f832c2cab72",
+		"name": "Hackaton_Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "obtener usuarios por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/users/623391c4836037a81f828b16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"623391c4836037a81f828b16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener vendors por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/vendors/62348cb8de22d424e0769901",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vendors",
+						"62348cb8de22d424e0769901"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener vendors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/vendors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Licencias solicitadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://backend-hack.herokuapp.com/api/v1/applications/request",
+					"protocol": "https",
+					"host": [
+						"backend-hack",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"applications",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Licencias aprobadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/applications/aproved",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"applications",
+						"aproved"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aprobacion de solicitud",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"confirm\": false}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/applications/6234a93a5197cdc69b6a3489",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"applications",
+						"6234a93a5197cdc69b6a3489"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear vendors",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"img\": \"https://www.jobtalent.com.ar/sitio/wp-content/uploads/2017/01/123456.jpg\",\r\n      \"url\": \"https://www.jobtalent.com.ar/sitio/\",\r\n      \"title\": \"Job Talent\",\r\n      \"category\": \"rrhh\",\r\n      \"description\": \"Formamos un grupo de profesionales de distintas disciplinas. En JOBTALENT creemos en las Oportunidades y buscamos ser el puente entre la estrategia, el desarrollo y la detección de creatividad potenciando siempre al Recurso Humano.\",\r\n      \"stock\": \"30\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-hack.herokuapp.com/api/v1/vendors",
+					"protocol": "https",
+					"host": [
+						"backend-hack",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vendors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear aplication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vendorId\": \"62348cb8de22d424e0769901\",\r\n    \"mail\": \"otro@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://backend-hack.herokuapp.com/api/v1/applications",
+					"protocol": "https",
+					"host": [
+						"backend-hack",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"applications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar stock",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"stock\":150\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/vendors/6233af41d4f498ec5a38466d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"vendors",
+						"6233af41d4f498ec5a38466d"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
