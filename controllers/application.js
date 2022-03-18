@@ -39,7 +39,7 @@ function requestList(req, res) {
 }
 
 function applicationAproved(req, res) {
-libreria loadge
+///libreria loadge
 }
 
 
