@@ -33,7 +33,7 @@ function requestList(req, res) {
     const id = req.params.id;
     try {
         Application.find({isStatus: false} ).populate("userId").populate("vendorId").exec((err, application) => {
-            if (error) {
+            if (err) {
                 res.status(500).send({message: 'Error critico en petición a la base de datos'});
                 return;
             }
