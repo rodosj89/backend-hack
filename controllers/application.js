@@ -27,10 +27,18 @@ async function  applicationCreate(req, res) {
     }
 }
 
-
-
 function requestList(req, res) {
-
+    try {
+        Application.find({isStatus: false}).then( application => {
+            if (!application) {
+                res.status(404).send({message: 'Licencias solicitadas no encontradas'});
+                return;
+            }
+            res.status(200).send(application);
+        });
+    } catch (error) {
+        res.status(408).send({message: 'Error al peticionar a la base de datos'});
+    }
 }
 
 function applicationAproved(req, res) {
