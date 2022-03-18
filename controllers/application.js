@@ -10,10 +10,7 @@ async function  applicationCreate(req, res) {
             return;
         }
 
-        console.log(user);
-
         const application = new Application({userId:user._id, vendorId});
-        console.log(application);
         application.save((error,application) => {
             if (error) {
                 res.status(500).send({message: 'Error critico en petición a la base de datos'});
