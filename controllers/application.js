@@ -1,6 +1,7 @@
 const { populate } = require("../models/application");
 const Application = require("../models/application");
 const User = require("../models/user");
+const Vendor = require("../models/vendor");
 
 async function  applicationCreate(req, res) {
     const {mail, vendorId} = req.body ; 
@@ -29,15 +30,20 @@ async function  applicationCreate(req, res) {
 }
 
 function requestList(req, res) {
+    const id = req.params.id;
     try {
-        Application.find({isStatus : false} ).populate("userId").populate("vendorId").exec((err, application) => {
-            console.log(application);
+        Application.find({isStatus: false} ).populate("userId").populate("vendorId").exec((err, application) => {
+            if (error) {
+                res.status(500).send({message: 'Error critico en petición a la base de datos'});
+                return;
+            }
             if (!application) {
                 res.status(404).send({message: 'Licencias solicitadas no encontradas'});
                 return;
             }
             res.status(200).send(application);
         });
+        
     } catch (error) {
         res.status(408).send({message: 'Error al peticionar a la base de datos'});
     }
@@ -45,7 +51,11 @@ function requestList(req, res) {
 
 function applicationAproved(req, res) {
     try {
-        Application.find({isStatus: true}).then( application => {
+        Application.find({isStatus: true}).populate("userId").populate("vendorId").exec((err, application) => {
+            if (err) {
+                res.status(500).send({message: 'Error critico en petición a la base de datos'});
+                return;
+            }
             if (!application) {
                 res.status(404).send({message: 'Licencias solicitadas no encontradas'});
                 return;
@@ -59,8 +69,34 @@ function applicationAproved(req, res) {
 }
 
 function applicationConfirm(req, res) {
-
-
+    try {
+        const id = req.params.id;
+        const {confirm} = req.body;
+        if (!confirm) {
+            //TODO: enviar mail al usuario para informar que esta en la cola de espera
+            res.status(200).send({message: 'Usuario informado y en lista de espera'})
+            return;
+        }
+        Application.findByIdAndUpdate(id, {isStatus: true}).exec((err, application) => {
+            if (err) {
+                res.status(500).send({message: 'Error critico en petición a la base de datos'});
+                return;
+            }
+            if (!application) {
+                res.status(404).send({message: 'Licencias solicitadas no encontradas'});
+                return;
+            }
+            Vendor.findByIdAndUpdate({_id: application.vendorId}, {
+                $inc:{
+                    stock: -1
+                }
+            }).exec();
+            
+            res.status(200).send(application);
+        });
+    } catch (error) {
+        res.status(408).send({message: 'Error al peticionar a la base de datos'});
+    }
 }
 
 
