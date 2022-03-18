@@ -5,6 +5,8 @@ const express = require('express');
 // load routing  
  const userRoutes = require('./routers/user');  
  const vendorRoutes = require('./routers/vendor');
+ const applicationRoutes = require('./routers/application');
+
  app.use(bodyParser.urlencoded({ extended: false }));  
  app.use(bodyParser.json());  
  
@@ -20,5 +22,6 @@ const express = require('express');
 // Router basic app.use(/api/${API_VERSION},authRoutes); 
  app.use("/api/v1",userRoutes);   
  app.use("/api/v1",vendorRoutes);   
+ app.use("/api/v1",applicationRoutes);   
      
 module.exports = app;

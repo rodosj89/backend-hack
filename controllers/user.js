@@ -15,4 +15,18 @@ function userById(req, res) {
     }
 }
 
-module.exports = {userById}
+function userGetAll(req, res) {
+    try {
+        User.find().then( users => {
+            if (!users) {
+                res.status(404).send({message: 'Usuarios no encontrado'});
+                return;
+            }
+            res.status(200).send(users);
+        });
+    } catch (error) {
+        res.status(408).send({message: 'Error al peticionar a la base de datos'});
+    }
+}
+
+module.exports = {userById,userGetAll}

@@ -4,7 +4,7 @@ const vendorCollection = 'vendor';
 
 const vendorSchema = new mongoose.Schema({
     title: {type: String, require: true},
-    category: {type: Array, default: []},
+    category: {type: String, require: true},
     description: {type: String, require: true},
     stock: {type: Number, require: true},
     img: {type: String, require: true},
