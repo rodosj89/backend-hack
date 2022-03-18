@@ -1,3 +1,4 @@
+const { populate } = require("../models/application");
 const Application = require("../models/application");
 const User = require("../models/user");
 
@@ -29,7 +30,8 @@ async function  applicationCreate(req, res) {
 
 function requestList(req, res) {
     try {
-        Application.find({isStatus: false}).then( application => {
+        Application.find({isStatus : false} ).populate("userId").populate("vendorId").exec((err, application) => {
+            console.log(application);
             if (!application) {
                 res.status(404).send({message: 'Licencias solicitadas no encontradas'});
                 return;
@@ -42,9 +44,25 @@ function requestList(req, res) {
 }
 
 function applicationAproved(req, res) {
-///libreria loadge
+    try {
+        Application.find({isStatus: true}).then( application => {
+            if (!application) {
+                res.status(404).send({message: 'Licencias solicitadas no encontradas'});
+                return;
+            }
+            res.status(200).send(application);
+        });
+    } catch (error) {
+        res.status(408).send({message: 'Error al peticionar a la base de datos'});
+    }
+
+}
+
+function applicationConfirm(req, res) {
+
+
 }
 
 
 
-module.exports = {applicationCreate,requestList,applicationAproved}
+module.exports = {applicationCreate,requestList,applicationAproved, applicationConfirm}
