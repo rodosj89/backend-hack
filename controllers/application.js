@@ -1,21 +1,15 @@
 const Vendor = require("../models/application");
+const User = require("../models/user");
 
-/*
-userId: {type: Schema.ObjectId, ref:"user", require: true},
-vendorId: {type: Schema.ObjectId, ref:"vendor", require: true},
-create:{type: Date, default: Day.now},
-days:{type: Number, dafault: 30},
-used:{type: Boolean, default: false},
-isStatus: {type: Boolean, default: false}
-*/
-
-function applicationCreate(req, res) {
+async function  applicationCreate(req, res) {
     const {mail, vendorId} = req.body ; 
     try {
+        const user = await User.findOne({ mail: mail }).exec();
+        if (!user) {
+            res.status(404).send({message: 'Email invalido'});
+        }
 
-        //buscar usuario por mail findOne
-
-        const application = new Application ({userId, vendorId});
+        const application = new Application ({userId:user.id, vendorId});
         vendor.save((error,vendor) => {
             if (error) {
                 res.status(500).send({message: 'Error critico en petición a la base de datos'});
